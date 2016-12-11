@@ -1,0 +1,29 @@
+version: "2"
+services:
+  robot01:
+    build: 
+      context: .
+    environment:
+      PORT: 8001
+    ports:
+      - '8001:8001'
+    volumes:
+      - ./Library/robot01:/root/.node-red
+  robot02:
+    build: 
+      context: .
+    environment:
+      PORT: 8002
+    ports:
+      - '8002:8002'
+    volumes:
+      - ./Library/robot02:/root/.node-red
+  robot03:
+    build: 
+      context: .
+    environment:
+      PORT: 8003
+    ports:
+      - '8003:8003'
+    volumes:
+      - ./Library/robot03:/root/.node-red

@@ -1,0 +1,24 @@
+{
+    "name": "wifirobots",
+    "version": "1.0.0",
+    "description": "Robots controlled over wifi with nodered",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node_modules/.bin/node-red"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mrinalvirnave/wifirobots.git"
+    },
+    "author": "Mrinal Virnave",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mrinalvirnave/wifirobots/issues"
+    },
+    "homepage": "https://github.com/mrinalvirnave/wifirobots#readme",
+    "dependencies": {
+        "node-red": "^0.15.2",
+        "node-red-contrib-gpio": "*"
+    }
+}
