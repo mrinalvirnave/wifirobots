@@ -431,6 +431,26 @@
      "file": "/usr/src/app/node_modules/node-red-node-twitter/27-twitter.js"
     }
    }
+  },
+  "node-red-contrib-gpio": {
+   "name": "node-red-contrib-gpio",
+   "version": "0.9.1",
+   "local": false,
+   "nodes": {
+    "gpio": {
+     "name": "gpio",
+     "types": [
+      "gpio in",
+      "gpio out",
+      "nodebot",
+      "johnny5"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-gpio",
+     "file": "/usr/src/app/node_modules/node-red-contrib-gpio/gpio.js"
+    }
+   }
   }
  },
  "_credentialSecret": "6d5a0f23f3eaa38596f0baa160c6fefe159f693a3a29deaea6876f578ed4ab42"
