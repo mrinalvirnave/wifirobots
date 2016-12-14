@@ -339,12 +339,22 @@
      "local": false,
      "module": "node-red",
      "file": "/usr/src/app/node_modules/node-red/nodes/core/storage/50-file.js"
+    },
+    "matrix": {
+     "name": "matrix",
+     "types": [
+      "matrix"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/root/.node-red/nodes/matrix/matrix.js"
     }
    }
   },
   "node-red-node-email": {
    "name": "node-red-node-email",
-   "version": "0.1.12",
+   "version": "0.1.14",
    "local": false,
    "nodes": {
     "email": {
