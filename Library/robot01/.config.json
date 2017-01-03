@@ -354,7 +354,7 @@
   },
   "node-red-node-email": {
    "name": "node-red-node-email",
-   "version": "0.1.14",
+   "version": "0.1.12",
    "local": false,
    "nodes": {
     "email": {
