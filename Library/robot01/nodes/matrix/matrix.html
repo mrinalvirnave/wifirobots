@@ -1,6 +1,5 @@
 <!--
-  Copyright 2014 IBM Corp.
-
+  Copyright 2016 Mrinal Virnave
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
@@ -13,13 +12,44 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
+<style>
+.mchkbox {
+  display: none !important;
+  width: 0% !important;
+}
 
-<!-- Sample html file that corresponds to the 99-sample.js file              -->
-<!-- This creates and configures the onscreen elements of the node           -->
+.mlabel {
+  cursor: pointer;
+  height: 10px !important;
+  width: 14px !important;
+  margin-bottom: 0px;
+}
 
-<!-- If you use this as a template, update the copyright with your own name. -->
+.mchkbox + .mlabel:before {
+  width: 10px !important;
+  height: 10px !important;
+  border: 2px solid gray;
+  border-radius: 4px;
+  background: lightgray;
+  position: relative;
+  display: inline-block;
+  margin-right: 0px;
+  content: "";
+}
 
-<!-- First, the content of the edit dialog is defined.                       -->
+.mchkbox:checked + .mlabel:before {
+  background: red;
+}
+
+#sprite {
+    line-height: 8px !important;
+}
+</style>
+<!-- 
+  This node renders an 8x8 LED matrix on screen
+  and passes an 8 element string arrays of 8 characters each
+  to be used to light up LEDs in a matrix
+ -->
 
 <script type="text/x-red" data-template-name="matrix">
    <!-- data-template-name identifies the node type this is for              -->
@@ -30,8 +60,9 @@
    <!-- (with the 'node-input-' prefix).                                     -->
    <!-- The available icon classes are defined Font Awesome Icons (FA Icons) -->
     <div class="form-row">
-        <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
-        <input type="text" id="node-input-topic" placeholder="Topic">
+        <label for="node-input-sprite"><i class="fa fa-th"></i> Matrix</label>
+        <div id="sprite">
+        </div>
     </div>
 
     <br/>
@@ -58,20 +89,54 @@
 <!-- The example below shows a small subset of the properties that can be set-->
 <script type="text/javascript">
     RED.nodes.registerType('matrix',{
-        category: 'input',      // the palette category
+        category: 'function',      // the palette category
+        color:"rgb(250, 160, 160",
         defaults: {             // defines the editable properties of the node
             name: {value:""},   //  along with default values.
-            topic: {value:"", required:true}
+            sprite: {value:[
+                "00000000",
+                "00110110",
+                "01001001",
+                "01000001",
+                "00100010",
+                "00010100",
+                "00001000",
+                "00000000"
+            ]}
         },
         inputs:1,               // set the number of inputs - only 0 or 1
         outputs:1,              // set the number of outputs - 0 to n
         // set the icon (held in icons dir below where you save the node)
         icon: "split.png",     // saved in  icons/myicon.png
         label: function() {     // sets the default label contents
-            return this.name||this.topic||"matrix";
+            return this.name||"LED Matrix";
         },
         labelStyle: function() { // sets the class to apply to the label
             return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function() {
+            var matrixText = '';
+            var chkd = '';            
+            for (var x = 0; x < 8; x++) {
+                for (var y = 0; y < 8; y++) {
+                    chkd = (this.sprite[x].substring(y,y+1) === '1')?'checked="checked"':'';
+                    matrixText += '<input type="checkbox" class="mchkbox" id="' + x + 'x' + y + '" ' + chkd + '><label for="' + x + 'x' + y + '" class="mlabel" />';
+                }
+                matrixText += '<br />'
+            }
+            $("#sprite").html(matrixText);
+        },
+        oneditsave: function() {
+            var matrixText = [];
+            for (var x = 0; x < 8; x++) {
+                var matrixLine = '';
+                for (var y = 0; y < 8; y++) {
+                    matrixLine += $('#' + x + 'x' + y).prop('checked')?'1':'0';
+                }
+                matrixText[x] = matrixLine;
+                //alert ('Saved '+ matrixLine + ' in ' + x);
+            }
+            this.sprite = matrixText;
         }
     });
 </script>
